@@ -111,6 +111,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <SmoothScroll />
       <Outlet />
     </QueryClientProvider>
   );
