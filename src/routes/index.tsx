@@ -21,14 +21,6 @@ import { memoryRows, type Memory } from "@/data/memories";
  */
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "OURFLIX — A Love Story, Now Streaming" },
-      { name: "description", content: "A cinematic Netflix-style birthday experience: every memory of us, premiered for you tonight." },
-      { property: "og:title", content: "OURFLIX — A Love Story, Now Streaming" },
-      { property: "og:description", content: "A cinematic Netflix-style birthday experience for the one I love." },
-    ],
-  }),
   component: Index,
 });
 
