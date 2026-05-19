@@ -7,6 +7,7 @@ import path from "path";
 
 // Standard SPA Vite configuration
 export default defineConfig({
+  base: "/",
   plugins: [
     TanStackRouterVite(),
     react(),
