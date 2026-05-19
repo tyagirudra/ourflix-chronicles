@@ -10,7 +10,7 @@ export default function SecretSection() {
   const tryUnlock = (e: React.FormEvent) => {
     e.preventDefault();
     const v = pw.trim().toLowerCase();
-    if (["forever", "us", "i love you", "love"].includes(v)) {
+    if (["200504"].includes(v)) {
       setOpen(true);
     } else {
       setShake(true);
@@ -55,7 +55,7 @@ export default function SecretSection() {
                   Open
                 </button>
               </div>
-              <p className="mt-3 text-xs text-white/40">try: forever</p>
+              <p className="mt-3 text-xs text-white/40">hint: 200504</p>
             </motion.form>
           ) : (
             <motion.div
@@ -68,14 +68,12 @@ export default function SecretSection() {
               <Unlock className="mx-auto text-gold mb-4" size={32} />
               <h3 className="font-display text-3xl text-center text-glow-gold">A Letter Just For You</h3>
               <div className="mt-6 font-script text-2xl leading-snug text-white/90 space-y-4">
-                <p>My favorite human,</p>
+                <p>My permanent one 🔐</p>
                 <p>
-                  If I made a list of every reason I love you, it would outlive us — and I'd still
-                  miss a few. So tonight, just this: thank you for being mine, for being loud, for being soft,
-                  for being a little chaotic and a lot of home.
+                  I just wanna tell you how much i love you how much i miss you all the time it's beyond anybody's expectations the way i love you it's like your birthday is a festival for me i pray to god and thank him saying how beautiful, gorgeous and very dil ka saaf person he sent for me how grateful I'm to have you in my life i literally wanna say thankyou for being mine for giving this precious opportunity to love you thankyou for being a little chaotic and a lot of home you are sukoon to my bhasad wali zindagi i love youu beyond this universe 🫶🏻🥹💋
                 </p>
-                <p>Happy birthday. The rest of the seasons are ours.</p>
-                <p className="text-primary text-glow-red">— always, me.</p>
+                <p>Happiest birthday my darling 🌹💗, enjoy your day have a wonderful life ahead with me 🧿</p>
+                <p className="text-primary text-glow-red">— always, me</p>
               </div>
               <div className="mt-6 flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-white/50">
                 <span className="h-2 w-2 rounded-full bg-gold animate-pulse" /> Private · 1 listener · You.

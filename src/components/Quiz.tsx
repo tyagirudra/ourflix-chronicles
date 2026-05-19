@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { quiz } from "@/data/movies";
+import { quiz } from "@/data/memories";
 import { Check, Sparkles } from "lucide-react";
 
 export default function Quiz() {

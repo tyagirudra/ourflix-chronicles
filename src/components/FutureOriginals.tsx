@@ -1,6 +1,12 @@
 import { motion } from "framer-motion";
-import { futureOriginals } from "@/data/movies";
+import { futureOriginals } from "@/data/memories";
 import { Bell } from "lucide-react";
+
+/*
+ * FutureOriginals — "Coming Next Season" section.
+ * Data comes from src/data/memories.ts → futureOriginals array.
+ * Edit that file to add/remove future memories.
+ */
 
 export default function FutureOriginals() {
   return (
@@ -27,7 +33,7 @@ export default function FutureOriginals() {
               className="group relative aspect-[3/4] rounded-2xl overflow-hidden border border-white/5 hover:border-primary/50 transition-all"
             >
               <img
-                src={m.poster}
+                src={m.image}
                 alt={m.title}
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-[2s] group-hover:scale-110"

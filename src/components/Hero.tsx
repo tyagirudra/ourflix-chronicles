@@ -1,8 +1,21 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Play, Info } from "lucide-react";
-import hero from "@/assets/hero.jpg";
+import { heroConfig } from "@/data/memories";
 import Particles from "./Particles";
+
+/*
+ * Hero Section — supports both background IMAGE and VIDEO.
+ *
+ * To use a custom image:
+ *   1. Place your image in: public/assets/photos/
+ *   2. Set heroConfig.backgroundImage in src/data/memories.ts
+ *
+ * To use a looping video background:
+ *   1. Place your .mp4 in: public/assets/videos/
+ *   2. Set heroConfig.backgroundVideo in src/data/memories.ts
+ *   3. The image is used as fallback while video loads.
+ */
 
 export default function Hero({ onPlay }: { onPlay: () => void }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -11,14 +24,33 @@ export default function Hero({ onPlay }: { onPlay: () => void }) {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
+  // Track whether the video has loaded so we can fade it in smoothly
+  const [videoReady, setVideoReady] = useState(false);
+
   return (
     <section id="home" ref={ref} className="relative h-[100svh] w-full overflow-hidden">
       <motion.div style={{ scale, y }} className="absolute inset-0">
+        {/* ── Fallback / Primary Image ── */}
         <img
-          src={hero}
+          src={heroConfig.backgroundImage}
           alt="cinematic"
           className="h-full w-full object-cover animate-kenburns"
+          loading="eager"
         />
+
+        {/* ── Optional Looping Video ── */}
+        {heroConfig.backgroundVideo && (
+          <video
+            src={heroConfig.backgroundVideo}
+            autoPlay
+            muted
+            loop
+            playsInline
+            onCanPlayThrough={() => setVideoReady(true)}
+            className="absolute inset-0 h-full w-full object-cover transition-opacity duration-1000"
+            style={{ opacity: videoReady ? 1 : 0 }}
+          />
+        )}
       </motion.div>
 
       <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-black/55 to-black/40" />
@@ -39,9 +71,9 @@ export default function Hero({ onPlay }: { onPlay: () => void }) {
           transition={{ delay: 0.6, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
           className="font-display text-6xl sm:text-8xl md:text-[8.5rem] leading-[0.95] max-w-5xl"
         >
-          Happy Birthday <br />
+          {heroConfig.headingLine1} <br />
           <span className="font-script text-primary text-glow-red text-7xl sm:text-9xl md:text-[10rem] normal-case">
-            My Love
+            {heroConfig.headingLine2}
           </span>
         </motion.h1>
         <motion.p
@@ -49,7 +81,7 @@ export default function Hero({ onPlay }: { onPlay: () => void }) {
           transition={{ delay: 1.1, duration: 0.9 }}
           className="mt-6 max-w-xl text-base sm:text-lg text-white/80"
         >
-          Tonight we relive our story — every laugh, every fight, every 3AM call, every quiet forever.
+          {heroConfig.subtitle}
         </motion.p>
 
         <motion.div

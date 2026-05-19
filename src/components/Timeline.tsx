@@ -1,12 +1,13 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
-import { timeline } from "@/data/movies";
+import { timeline } from "@/data/memories";
 
 export default function Timeline() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-72%"]);
-  const lineWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const smoothProgress = useSpring(scrollYProgress, { mass: 0.1, stiffness: 100, damping: 20 });
+  const x = useTransform(smoothProgress, [0, 1], ["0%", "-85%"]);
+  const lineWidth = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
 
   return (
     <section id="timeline" ref={ref} className="relative h-[400vh]">
@@ -24,14 +25,14 @@ export default function Timeline() {
             className="absolute left-0 top-1/2 h-px bg-gradient-to-r from-primary via-accent to-gold shadow-[0_0_20px_rgba(229,9,20,0.8)]"
           />
 
-          <motion.div style={{ x }} className="flex gap-8 px-6 sm:px-14 will-change-transform">
+          <motion.div style={{ x }} className="flex items-stretch gap-8 pl-6 sm:pl-14 pr-[50vw] will-change-transform w-max">
             {timeline.map((t, i) => (
-              <div key={i} className="shrink-0 w-[320px] sm:w-[380px]">
-                <div className="glass rounded-2xl p-6 sm:p-8 relative overflow-hidden">
+              <div key={i} className="shrink-0 w-[320px] sm:w-[380px] flex">
+                <div className="glass rounded-2xl p-6 sm:p-8 relative overflow-hidden w-full flex flex-col">
                   <div className="absolute -top-12 -right-12 h-32 w-32 rounded-full bg-primary/30 blur-3xl" />
                   <span className="text-xs tracking-[0.4em] uppercase text-gold">{t.date}</span>
                   <h3 className="font-display text-3xl sm:text-4xl mt-3">{t.title}</h3>
-                  <p className="mt-4 text-white/75 leading-relaxed">{t.text}</p>
+                  <p className="mt-4 text-white/75 leading-relaxed flex-1">{t.text}</p>
                   <div className="mt-6 flex items-center gap-2 text-xs text-white/50 uppercase tracking-widest">
                     <span className="h-2 w-2 rounded-full bg-primary animate-pulse" /> Episode {String(i + 1).padStart(2, "0")}
                   </div>

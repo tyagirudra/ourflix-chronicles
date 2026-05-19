@@ -103,12 +103,20 @@ export default function Finale() {
             </p>
 
             <div className="mt-10 flex flex-col items-center gap-3">
-              <div className="glass rounded-full px-6 py-3 flex items-center gap-3">
-                <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-                <span className="text-xs tracking-[0.3em] uppercase">Voice note · 00:47</span>
-                <button className="ml-2 h-8 px-4 rounded-full bg-primary text-white text-xs font-semibold hover:scale-105 transition shadow-[0_0_20px_rgba(229,9,20,0.6)]">
-                  ▶ Play
-                </button>
+              <div className="glass rounded-full px-6 py-3 flex flex-col sm:flex-row items-center gap-4">
+                <div className="flex items-center gap-3">
+                  <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+                  <span className="text-xs tracking-[0.3em] uppercase text-gold">Final Voice Note</span>
+                </div>
+                <audio
+                  src="/assets/voicenotes/finale.mp3"
+                  controls
+                  onPlay={() => window.dispatchEvent(new Event("pause-soundtrack"))}
+                  onPause={() => window.dispatchEvent(new Event("resume-soundtrack"))}
+                  onEnded={() => window.dispatchEvent(new Event("resume-soundtrack"))}
+                  className="h-9 w-48 sm:w-64 [&::-webkit-media-controls-panel]:bg-white/10 [&::-webkit-media-controls-panel]:rounded-full"
+                  style={{ filter: "invert(1) hue-rotate(180deg)", borderRadius: "999px" }}
+                />
               </div>
               <p className="text-xs text-white/40 mt-2">Best heard with headphones in.</p>
             </div>

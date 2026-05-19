@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Search, Bell, Volume2, VolumeX } from "lucide-react";
 
-const links = ["Home", "Memories", "Reels", "Timeline", "Quiz", "Originals", "Finale"];
+const links = ["Home", "Memories", "Timeline", "Quiz", "Originals", "Finale"];
 
 export default function Navbar({ muted, setMuted }: { muted: boolean; setMuted: (v: boolean) => void }) {
   const [scrolled, setScrolled] = useState(false);
